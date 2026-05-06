@@ -36,7 +36,7 @@ with st.sidebar:
 
 # ---------- MAIN 3D SCENE ----------
 st.markdown("<h1 style='text-align: center;'>🔥 PORT-AU-PRINCE HAITI 🔥</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>The belt keeps spinning – fire, sparks, smoke, and a voice that tells the truth</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>The belt spins – capital letters, fire, sparks, smoke, and a voice that tells the truth</p>", unsafe_allow_html=True)
 
 belt_html = """
 <!DOCTYPE html>
@@ -172,14 +172,14 @@ belt_html = """
         floor.receiveShadow = true;
         scene.add(floor);
 
-        // --- THE BELT with rotating text "PORT-AU-PRINCE HAITI"
+        // --- THE BELT with CAPITAL LETTER TEXT: "PORT-AU-PRINCE HAITI"
         const canvas = document.createElement('canvas');
         canvas.width = 1024;
         canvas.height = 256;
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.font = 'Bold 52px "Arial Black", "Impact"';
+        ctx.font = 'Bold 54px "Arial Black", "Impact"';
         ctx.fillStyle = '#ffaa33';
         ctx.shadowBlur = 0;
         const text = "PORT-AU-PRINCE HAITI  •  ";
@@ -264,7 +264,7 @@ belt_html = """
             requestAnimationFrame(animate);
             time += 0.02;
             
-            belt.rotation.z += 0.02;
+            belt.rotation.z += 0.02;   // belt spins, making the text circle
             innerRing.rotation.z += 0.025;
             sparks.rotation.y += 0.01;
             sparks.rotation.x = Math.sin(time * 0.5) * 0.1;
@@ -323,4 +323,4 @@ belt_html = """
 st.components.v1.html(belt_html, height=700, scrolling=False)
 
 st.markdown("---")
-st.caption("🔥 The Belt of Fire – Symbolizing resilience and pain of Port‑au‑Prince, Haiti (2021–2026)")
+st.caption("🔥 The Belt of Fire – PORT-AU-PRINCE HAITI in capital letters, spinning with fire, sparks, and smoke (2021–2026)")
