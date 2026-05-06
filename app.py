@@ -36,7 +36,7 @@ with st.sidebar:
 
 # ---------- MAIN 3D SCENE ----------
 st.markdown("<h1 style='text-align: center;'>🔥 PORT-AU-PRINCE HAITI 🔥</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>The belt spins – capital letters, fire, sparks, smoke, and a voice that tells the truth</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>The belt spins with white capital letters – fire, sparks, smoke, and a voice of truth</p>", unsafe_allow_html=True)
 
 belt_html = """
 <!DOCTYPE html>
@@ -153,11 +153,11 @@ belt_html = """
         // --- lighting
         const ambient = new THREE.AmbientLight(0x222222);
         scene.add(ambient);
-        const mainLight = new THREE.DirectionalLight(0xffaa66, 1);
+        const mainLight = new THREE.DirectionalLight(0xffaa66, 1.2);
         mainLight.position.set(2, 3, 4);
         mainLight.castShadow = true;
         scene.add(mainLight);
-        const fillLight = new THREE.PointLight(0xff6600, 0.5);
+        const fillLight = new THREE.PointLight(0xff6600, 0.6);
         fillLight.position.set(1, 1, 2);
         scene.add(fillLight);
         const backLight = new THREE.PointLight(0xff3300, 0.3);
@@ -172,27 +172,34 @@ belt_html = """
         floor.receiveShadow = true;
         scene.add(floor);
 
-        // --- THE BELT with CAPITAL LETTER TEXT: "PORT-AU-PRINCE HAITI"
+        // --- THE BELT with WHITE CAPITAL TEXT: "PORT-AU-PRINCE HAITI"
         const canvas = document.createElement('canvas');
         canvas.width = 1024;
         canvas.height = 256;
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.font = 'Bold 54px "Arial Black", "Impact"';
-        ctx.fillStyle = '#ffaa33';
+        
+        // White text with strong black outline for readability
+        ctx.font = 'Bold 60px "Arial Black", "Impact"';
+        ctx.fillStyle = '#ffffff';
         ctx.shadowBlur = 0;
         const text = "PORT-AU-PRINCE HAITI  •  ";
         const textWidth = ctx.measureText(text).width;
         const repeats = Math.ceil(canvas.width / textWidth) + 1;
-        for (let i = 0; i < repeats; i++) {
-            ctx.fillText(text, i * textWidth, canvas.height/2 + 20);
-        }
-        ctx.strokeStyle = '#ff4400';
-        ctx.lineWidth = 4;
+        
+        // Draw outline first (black stroke)
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = '#000000';
         for (let i = 0; i < repeats; i++) {
             ctx.strokeText(text, i * textWidth, canvas.height/2 + 20);
         }
+        // Then draw white fill
+        ctx.fillStyle = '#ffffff';
+        for (let i = 0; i < repeats; i++) {
+            ctx.fillText(text, i * textWidth, canvas.height/2 + 20);
+        }
+        
         const texture = new THREE.CanvasTexture(canvas);
         texture.wrapS = THREE.RepeatWrapping;
         texture.repeat.set(3, 1);
@@ -264,7 +271,7 @@ belt_html = """
             requestAnimationFrame(animate);
             time += 0.02;
             
-            belt.rotation.z += 0.02;   // belt spins, making the text circle
+            belt.rotation.z += 0.02;   // belt spins, making the white text circle
             innerRing.rotation.z += 0.025;
             sparks.rotation.y += 0.01;
             sparks.rotation.x = Math.sin(time * 0.5) * 0.1;
@@ -323,4 +330,4 @@ belt_html = """
 st.components.v1.html(belt_html, height=700, scrolling=False)
 
 st.markdown("---")
-st.caption("🔥 The Belt of Fire – PORT-AU-PRINCE HAITI in capital letters, spinning with fire, sparks, and smoke (2021–2026)")
+st.caption("🔥 The Belt of Fire – PORT-AU-PRINCE HAITI in bright white capital letters, spinning with fire, sparks, and smoke (2021–2026)")
