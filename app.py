@@ -7,6 +7,29 @@ st.set_page_config(
     layout="wide"
 )
 
+# ---------- LANGUAGE SELECTION ----------
+lang = st.sidebar.selectbox("🌐 Language / Idioma / Langue", ["English", "Español", "Français"])
+
+# ---------- TRANSLATIONS ----------
+if lang == "English":
+    voice_text = "Since 2021, Port‑au‑Prince Haiti has been under great pressure. Chaos has become the status. A lot of streets like Rue de la Réunion, Rue Joseph Janvier, Rue Carbone, so from Portail Léogâne to Champs‑de‑Mars, all the streets from our childhood have gone to trash, rubble and destroyed. The airport Toussaint Louverture, according to some people, has become a military base, while thousands of displaced people live in camps. It seems that the protagonists have no intention to fix Port‑au‑Prince Haiti. We Haitians, we are tired."
+    voice_lang = "en-US"
+    button_label = "🔊 AI Voice – The Story of Port‑au‑Prince"
+    sidebar_info = "Click the voice button inside the 3D scene to hear the story of Port‑au‑Prince."
+    belt_title = "The belt spins with white capital letters – fire, sparks, smoke, and a voice of truth"
+elif lang == "Español":
+    voice_text = "Desde 2021, Puerto Príncipe, Haití, ha estado bajo una gran presión. El caos se ha convertido en el estado normal. Muchas calles como Rue de la Réunion, Rue Joseph Janvier, Rue Carbone, desde Portail Léogâne hasta Champs‑de‑Mars, todas las calles de nuestra infancia se han convertido en basura, escombros y destrucción. El aeropuerto Toussaint Louverture, según algunas personas, se ha convertido en una base militar, mientras miles de desplazados viven en campamentos. Parece que los protagonistas no tienen intención de arreglar Puerto Príncipe, Haití. Los haitianos estamos cansados."
+    voice_lang = "es-ES"
+    button_label = "🔊 Voz IA – La historia de Puerto Príncipe"
+    sidebar_info = "Haz clic en el botón de voz dentro de la escena 3D para escuchar la historia de Puerto Príncipe."
+    belt_title = "La cinta gira con letras blancas mayúsculas – fuego, chispas, humo y una voz de verdad"
+else:  # Français
+    voice_text = "Depuis 2021, Port‑au‑Prince Haïti est sous une grande pression. Le chaos est devenu la norme. Beaucoup de rues comme la rue de la Réunion, la rue Joseph Janvier, la rue Carbone, du Portail Léogâne au Champs‑de‑Mars, toutes les rues de notre enfance sont devenues des décharges, des décombres et de la destruction. L'aéroport Toussaint Louverture, selon certaines personnes, est devenu une base militaire, tandis que des milliers de personnes déplacées vivent dans des camps. Il semble que les protagonistes n'aient aucune intention de réparer Port‑au‑Prince Haïti. Nous, Haïtiens, nous sommes fatigués."
+    voice_lang = "fr-FR"
+    button_label = "🔊 Voix IA – L'histoire de Port‑au‑Prince"
+    sidebar_info = "Cliquez sur le bouton vocal dans la scène 3D pour écouter l'histoire de Port‑au‑Prince."
+    belt_title = "La ceinture tourne avec des lettres majuscules blanches – feu, étincelles, fumée et une voix de vérité"
+
 # ---------- SIDEBAR ----------
 with st.sidebar:
     st.markdown("""
@@ -32,19 +55,20 @@ with st.sidebar:
     st.markdown("✉️ deslandes78@gmail.com")
     st.markdown("---")
     st.markdown("### 🔥 The Belt of Fire")
-    st.info("Click the voice button inside the 3D scene to hear the story of Port‑au‑Prince.")
+    st.info(sidebar_info)
 
 # ---------- MAIN 3D SCENE ----------
 st.markdown("<h1 style='text-align: center;'>🔥 PORT-AU-PRINCE HAITI 🔥</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>The belt spins with white capital letters – fire, sparks, smoke, and a voice of truth</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center;'>{belt_title}</p>", unsafe_allow_html=True)
 
-belt_html = """
+# Build HTML with translated voice text
+belt_html = f"""
 <!DOCTYPE html>
 <html>
 <head>
     <style>
-        body { margin: 0; overflow: hidden; font-family: 'Impact', 'Arial Black', sans-serif; }
-        #date-overlay {
+        body {{ margin: 0; overflow: hidden; font-family: 'Impact', 'Arial Black', sans-serif; }}
+        #date-overlay {{
             position: absolute;
             bottom: 30px;
             left: 0;
@@ -60,8 +84,8 @@ belt_html = """
             z-index: 100;
             font-family: monospace;
             letter-spacing: 4px;
-        }
-        #voiceBtn {
+        }}
+        #voiceBtn {{
             position: absolute;
             bottom: 20px;
             right: 20px;
@@ -77,16 +101,16 @@ belt_html = """
             transition: 0.2s;
             pointer-events: auto;
             font-family: Arial;
-        }
-        #voiceBtn:hover {
+        }}
+        #voiceBtn:hover {{
             background: #cc0000;
             transform: scale(1.02);
-        }
-        @media (max-width: 768px) {
-            #date-overlay { font-size: 1.8rem; bottom: 15px; }
-            #voiceBtn { padding: 8px 16px; font-size: 12px; }
-        }
-        #info {
+        }}
+        @media (max-width: 768px) {{
+            #date-overlay {{ font-size: 1.8rem; bottom: 15px; }}
+            #voiceBtn {{ padding: 8px 16px; font-size: 12px; }}
+        }}
+        #info {{
             position: absolute;
             top: 20px;
             left: 20px;
@@ -97,27 +121,27 @@ belt_html = """
             font-size: 12px;
             pointer-events: none;
             z-index: 100;
-        }
+        }}
     </style>
 </head>
 <body>
     <div id="date-overlay">🔥 2021 → 2026 🔥</div>
     <div id="info">Spinning belt of fire | Sparks & smoke | Drag to rotate</div>
-    <button id="voiceBtn">🔊 AI Voice – The Story of Port‑au‑Prince</button>
+    <button id="voiceBtn">{button_label}</button>
 
     <script type="importmap">
-        {
-            "imports": {
+        {{
+            "imports": {{
                 "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
                 "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
-            }
-        }
+            }}
+        }}
     </script>
 
     <script type="module">
         import * as THREE from 'three';
-        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-        import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+        import {{ OrbitControls }} from 'three/addons/controls/OrbitControls.js';
+        import {{ CSS2DRenderer, CSS2DObject }} from 'three/addons/renderers/CSS2DRenderer.js';
 
         // --- setup scene
         const scene = new THREE.Scene();
@@ -128,7 +152,7 @@ belt_html = """
         camera.position.set(3, 2, 5);
         camera.lookAt(0, 0, 0);
 
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        const renderer = new THREE.WebGLRenderer({{ antialias: true }});
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMap.enabled = true;
         document.body.appendChild(renderer.domElement);
@@ -165,7 +189,7 @@ belt_html = """
         scene.add(backLight);
 
         // --- floor
-        const floorMat = new THREE.MeshStandardMaterial({ color: 0x111122, roughness: 0.8, metalness: 0.2 });
+        const floorMat = new THREE.MeshStandardMaterial({{ color: 0x111122, roughness: 0.8, metalness: 0.2 }});
         const floor = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), floorMat);
         floor.rotation.x = -Math.PI/2;
         floor.position.y = -1.2;
@@ -180,7 +204,6 @@ belt_html = """
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        // White text with strong black outline for readability
         ctx.font = 'Bold 60px "Arial Black", "Impact"';
         ctx.fillStyle = '#ffffff';
         ctx.shadowBlur = 0;
@@ -188,30 +211,28 @@ belt_html = """
         const textWidth = ctx.measureText(text).width;
         const repeats = Math.ceil(canvas.width / textWidth) + 1;
         
-        // Draw outline first (black stroke)
         ctx.lineWidth = 8;
         ctx.strokeStyle = '#000000';
-        for (let i = 0; i < repeats; i++) {
+        for (let i = 0; i < repeats; i++) {{
             ctx.strokeText(text, i * textWidth, canvas.height/2 + 20);
-        }
-        // Then draw white fill
+        }}
         ctx.fillStyle = '#ffffff';
-        for (let i = 0; i < repeats; i++) {
+        for (let i = 0; i < repeats; i++) {{
             ctx.fillText(text, i * textWidth, canvas.height/2 + 20);
-        }
+        }}
         
         const texture = new THREE.CanvasTexture(canvas);
         texture.wrapS = THREE.RepeatWrapping;
         texture.repeat.set(3, 1);
 
-        const beltMat = new THREE.MeshStandardMaterial({ map: texture, color: 0xff6600, emissive: 0x442200, roughness: 0.3, metalness: 0.7 });
+        const beltMat = new THREE.MeshStandardMaterial({{ map: texture, color: 0xff6600, emissive: 0x442200, roughness: 0.3, metalness: 0.7 }});
         const beltGeometry = new THREE.TorusGeometry(1.5, 0.15, 64, 200);
         const belt = new THREE.Mesh(beltGeometry, beltMat);
         belt.castShadow = true;
         scene.add(belt);
         belt.rotation.x = Math.PI / 2;
         
-        const innerRingMat = new THREE.MeshStandardMaterial({ color: 0xff3300, emissive: 0x552200 });
+        const innerRingMat = new THREE.MeshStandardMaterial({{ color: 0xff3300, emissive: 0x552200 }});
         const innerRing = new THREE.Mesh(new THREE.TorusGeometry(1.35, 0.05, 64, 200), innerRingMat);
         innerRing.rotation.x = Math.PI / 2;
         innerRing.castShadow = true;
@@ -221,15 +242,15 @@ belt_html = """
         const sparkCount = 800;
         const sparkGeometry = new THREE.BufferGeometry();
         const sparkPositions = new Float32Array(sparkCount * 3);
-        for (let i = 0; i < sparkCount; i++) {
+        for (let i = 0; i < sparkCount; i++) {{
             const radius = 1.2 + Math.random() * 0.6;
             const angle = Math.random() * Math.PI * 2;
             sparkPositions[i*3] = Math.cos(angle) * radius;
             sparkPositions[i*3+1] = (Math.random() - 0.5) * 0.8;
             sparkPositions[i*3+2] = Math.sin(angle) * radius;
-        }
+        }}
         sparkGeometry.setAttribute('position', new THREE.BufferAttribute(sparkPositions, 3));
-        const sparkMaterial = new THREE.PointsMaterial({ color: 0xff6600, size: 0.05, transparent: true, blending: THREE.AdditiveBlending });
+        const sparkMaterial = new THREE.PointsMaterial({{ color: 0xff6600, size: 0.05, transparent: true, blending: THREE.AdditiveBlending }});
         const sparks = new THREE.Points(sparkGeometry, sparkMaterial);
         scene.add(sparks);
 
@@ -238,14 +259,14 @@ belt_html = """
         const smokeGeometry = new THREE.BufferGeometry();
         const smokePositions = new Float32Array(smokeCount * 3);
         const smokeVelocities = [];
-        for (let i = 0; i < smokeCount; i++) {
+        for (let i = 0; i < smokeCount; i++) {{
             smokePositions[i*3] = (Math.random() - 0.5) * 5;
             smokePositions[i*3+1] = Math.random() * 3;
             smokePositions[i*3+2] = (Math.random() - 0.5) * 5;
-            smokeVelocities.push({ y: 0.005 + Math.random() * 0.01, x: (Math.random()-0.5)*0.003, z: (Math.random()-0.5)*0.003 });
-        }
+            smokeVelocities.push({{ y: 0.005 + Math.random() * 0.01, x: (Math.random()-0.5)*0.003, z: (Math.random()-0.5)*0.003 }});
+        }}
         smokeGeometry.setAttribute('position', new THREE.BufferAttribute(smokePositions, 3));
-        const smokeMaterial = new THREE.PointsMaterial({ color: 0xaaaaaa, size: 0.08, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
+        const smokeMaterial = new THREE.PointsMaterial({{ color: 0xaaaaaa, size: 0.08, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending }});
         const smoke = new THREE.Points(smokeGeometry, smokeMaterial);
         scene.add(smoke);
 
@@ -253,46 +274,45 @@ belt_html = """
         const flameCount = 200;
         const flameGeometry = new THREE.BufferGeometry();
         const flamePositions = new Float32Array(flameCount * 3);
-        for (let i = 0; i < flameCount; i++) {
+        for (let i = 0; i < flameCount; i++) {{
             const angle = Math.random() * Math.PI * 2;
             const rad = 1.65;
             flamePositions[i*3] = Math.cos(angle) * rad;
             flamePositions[i*3+1] = (Math.random() - 0.5) * 0.6;
             flamePositions[i*3+2] = Math.sin(angle) * rad;
-        }
+        }}
         flameGeometry.setAttribute('position', new THREE.BufferAttribute(flamePositions, 3));
-        const flameMaterial = new THREE.PointsMaterial({ color: 0xff4400, size: 0.04, transparent: true, blending: THREE.AdditiveBlending });
+        const flameMaterial = new THREE.PointsMaterial({{ color: 0xff4400, size: 0.04, transparent: true, blending: THREE.AdditiveBlending }});
         const flames = new THREE.Points(flameGeometry, flameMaterial);
         scene.add(flames);
 
         // --- animation loop (belt spin, smoke rise)
         let time = 0;
-        function animate() {
+        function animate() {{
             requestAnimationFrame(animate);
             time += 0.02;
             
-            belt.rotation.z += 0.02;   // belt spins, making the white text circle
+            belt.rotation.z += 0.02;
             innerRing.rotation.z += 0.025;
             sparks.rotation.y += 0.01;
             sparks.rotation.x = Math.sin(time * 0.5) * 0.1;
             flames.rotation.y -= 0.015;
             flames.rotation.x = Math.sin(time) * 0.2;
             
-            // smoke rise
             const positions = smoke.geometry.attributes.position.array;
-            for (let i = 0; i < smokeCount; i++) {
+            for (let i = 0; i < smokeCount; i++) {{
                 let y = positions[i*3+1];
                 y += smokeVelocities[i].y;
-                if (y > 2.5) {
+                if (y > 2.5) {{
                     y = -0.5;
                     positions[i*3] = (Math.random() - 0.5) * 5;
                     positions[i*3+2] = (Math.random() - 0.5) * 5;
-                } else {
+                }} else {{
                     positions[i*3] += smokeVelocities[i].x;
                     positions[i*3+2] += smokeVelocities[i].z;
-                }
+                }}
                 positions[i*3+1] = y;
-            }
+            }}
             smoke.geometry.attributes.position.needsUpdate = true;
             sparks.rotation.z += 0.005;
             const intensity = 0.5 + Math.sin(time * 5) * 0.2;
@@ -301,27 +321,27 @@ belt_html = """
             controls.update();
             renderer.render(scene, camera);
             labelRenderer.render(scene, camera);
-        }
+        }}
         animate();
         
-        window.addEventListener('resize', () => {
+        window.addEventListener('resize', () => {{
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
             labelRenderer.setSize(window.innerWidth, window.innerHeight);
-        });
+        }});
         
-        // --- AI VOICE BUTTON
+        // --- AI VOICE BUTTON (translated)
         const voiceBtn = document.getElementById('voiceBtn');
-        voiceBtn.addEventListener('click', () => {
+        voiceBtn.addEventListener('click', () => {{
             const speech = new SpeechSynthesisUtterance();
-            speech.text = "Since 2021, Port‑au‑Prince Haiti has been under great pressure. Chaos has become the status. A lot of streets like Rue de la Réunion, Rue Joseph Janvier, Rue Carbone, so from Portail Léogâne to Champs‑de‑Mars, all the streets from our childhood have gone to trash, rubble and destroyed. The airport Toussaint Louverture, according to some people, has become a military base, while thousands of displaced people live in camps. It seems that the protagonists have no intention to fix Port‑au‑Prince Haiti. We Haitians, we are tired.";
-            speech.lang = 'en-US';
+            speech.text = `{voice_text}`;
+            speech.lang = "{voice_lang}";
             speech.rate = 0.9;
             speech.pitch = 1.0;
             window.speechSynthesis.cancel();
             window.speechSynthesis.speak(speech);
-        });
+        }});
     </script>
 </body>
 </html>
