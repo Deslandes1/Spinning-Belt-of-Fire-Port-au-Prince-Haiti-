@@ -10,21 +10,21 @@ st.set_page_config(
 # ---------- LANGUAGE SELECTION ----------
 lang = st.sidebar.selectbox("🌐 Language / Idioma / Langue", ["English", "Español", "Français"])
 
-# ---------- TRANSLATIONS ----------
+# ---------- TRANSLATIONS (UPDATED VOICE TEXT) ----------
 if lang == "English":
-    voice_text = "Since 2021, Port‑au‑Prince Haiti has been under great pressure. Chaos has become the status. A lot of streets like Rue de la Réunion, Rue Joseph Janvier, Rue Carbone, so from Portail Léogâne to Champs‑de‑Mars, all the streets from our childhood have gone to trash, rubble and destroyed. The airport Toussaint Louverture, according to some people, has become a military base, while thousands of displaced people live in camps. It seems that the protagonists have no intention to fix Port‑au‑Prince Haiti. We Haitians, we are tired."
+    voice_text = """After the assassination of President Jovenel Moïse, from 2021 to 2026, we Haitians watch our media wait for trials abroad to know the final verdict of who really killed the former president. For five years, the Haitian protagonists have destroyed the city of Port‑au‑Prince with all the atrocities you already know: killing, raping, kidnapping, burning human bodies alive, etc. The simple citizens living on Rue de la Réunion, Rue Joseph Janvier, Rue Carbone, Rue Monseigneur Guilloux, so from Portail Léogâne to Champs‑de‑Mars — the streets of my childhood — were all destroyed. This political turmoil hit harder than the 2010 earthquake, because 2010 was a second‑time disaster, but this atrocity has been going on for five years. Those who were not victimized by it live happy ever after, even though they live in the same country but in a different department. Let's wait for Karma to handle it."""
     voice_lang = "en-US"
     button_label = "🔊 AI Voice – The Story of Port‑au‑Prince"
     sidebar_info = "Click the voice button inside the 3D scene to hear the story of Port‑au‑Prince."
     belt_title = "The belt spins with white capital letters – fire, sparks, smoke, and a voice of truth"
 elif lang == "Español":
-    voice_text = "Desde 2021, Puerto Príncipe, Haití, ha estado bajo una gran presión. El caos se ha convertido en el estado normal. Muchas calles como Rue de la Réunion, Rue Joseph Janvier, Rue Carbone, desde Portail Léogâne hasta Champs‑de‑Mars, todas las calles de nuestra infancia se han convertido en basura, escombros y destrucción. El aeropuerto Toussaint Louverture, según algunas personas, se ha convertido en una base militar, mientras miles de desplazados viven en campamentos. Parece que los protagonistas no tienen intención de arreglar Puerto Príncipe, Haití. Los haitianos estamos cansados."
+    voice_text = """Después del asesinato del presidente Jovenel Moïse, desde 2021 hasta 2026, los haitianos vemos cómo nuestros medios esperan juicios en el extranjero para conocer el veredicto final de quién mató realmente al expresidente. Durante cinco años, los protagonistas haitianos han destruido la ciudad de Puerto Príncipe con todas las atrocidades que ya conoces: asesinatos, violaciones, secuestros, quema de cuerpos humanos vivos, etc. Los ciudadanos de a pie que viven en la calle Rue de la Réunion, Rue Joseph Janvier, Rue Carbone, Rue Monseigneur Guilloux, desde Portail Léogâne hasta Champs‑de‑Mars — las calles de mi infancia — quedaron completamente destruidas. Esta agitación política ha sido más amarga que el terremoto de 2010, porque el de 2010 fue un golpe de segunda categoría, pero esta atrocidad lleva cinco años. Los que no fueron victimizados viven felices para siempre, aunque vivan en el mismo país pero en un departamento diferente. Esperemos que el Karma se encargue de ello."""
     voice_lang = "es-ES"
     button_label = "🔊 Voz IA – La historia de Puerto Príncipe"
     sidebar_info = "Haz clic en el botón de voz dentro de la escena 3D para escuchar la historia de Puerto Príncipe."
     belt_title = "La cinta gira con letras blancas mayúsculas – fuego, chispas, humo y una voz de verdad"
 else:  # Français
-    voice_text = "Depuis 2021, Port‑au‑Prince Haïti est sous une grande pression. Le chaos est devenu la norme. Beaucoup de rues comme la rue de la Réunion, la rue Joseph Janvier, la rue Carbone, du Portail Léogâne au Champs‑de‑Mars, toutes les rues de notre enfance sont devenues des décharges, des décombres et de la destruction. L'aéroport Toussaint Louverture, selon certaines personnes, est devenu une base militaire, tandis que des milliers de personnes déplacées vivent dans des camps. Il semble que les protagonistes n'aient aucune intention de réparer Port‑au‑Prince Haïti. Nous, Haïtiens, nous sommes fatigués."
+    voice_text = """Après l'assassinat du président Jovenel Moïse, de 2021 à 2026, nous, Haïtiens, regardons nos médias attendre des procès à l'étranger pour connaître le verdict final sur qui a vraiment tué l'ancien président. Pendant cinq ans, les protagonistes haïtiens ont détruit la ville de Port‑au‑Prince avec toutes les atrocités que vous connaissez : meurtres, viols, kidnappings, brûlures de corps humains vivants, etc. Les simples citoyens vivant rue de la Réunion, rue Joseph Janvier, rue Carbone, rue Monseigneur Guilloux, du Portail Léogâne au Champs‑de‑Mars — les rues de mon enfance — ont toutes été détruites. Ces troubles politiques ont frappé plus durement que le tremblement de terre de 2010, car 2010 a été un coup de second ordre, mais cette atrocité dure depuis cinq ans. Ceux qui n'en ont pas été victimes vivent heureux à jamais, même s'ils vivent dans le même pays mais dans un département différent. Attendons que le Karma s'en occupe."""
     voice_lang = "fr-FR"
     button_label = "🔊 Voix IA – L'histoire de Port‑au‑Prince"
     sidebar_info = "Cliquez sur le bouton vocal dans la scène 3D pour écouter l'histoire de Port‑au‑Prince."
@@ -331,7 +331,7 @@ belt_html = f"""
             labelRenderer.setSize(window.innerWidth, window.innerHeight);
         }});
         
-        // --- AI VOICE BUTTON (translated)
+        // --- AI VOICE BUTTON (updated text)
         const voiceBtn = document.getElementById('voiceBtn');
         voiceBtn.addEventListener('click', () => {{
             const speech = new SpeechSynthesisUtterance();
